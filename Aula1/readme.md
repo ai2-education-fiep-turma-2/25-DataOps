@@ -15,6 +15,7 @@ export PATH=$HADOOP_HOME/bin/:$PATH
 
 * Trocar versão da biblioteca guava (apagar a mais antiga do diretório $HIVE/lib/:
 ```  
+  rm -rf $HIVE/lib/guava-14.0.1.jar
   cp $HADOOP/share/hadoop/hdfs/lib/guava-27.0-jre.jar  $HIVE/lib/
 ```
 
