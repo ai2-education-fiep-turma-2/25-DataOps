@@ -134,34 +134,3 @@ airflow test tutorialteste print_host 2015-01-01
 ```
 airflow backfill tutorialteste -s 2015-06-01 -e 2015-06-07
 ```
-
-Ativando interface gráfica do Airflow
-```
-
-airflow webserver
-```
-
-Exemplo de um DAG para sicob
-
-Visao geral do DAG
-
-* Task prep_cliente 
-    * Entrada : /tmp/CLIENTES_PF_NUM_CC.csv
-    * Saída: "/tmp/CLIENTES_CLEANED.csv"
-
-* Task prep_mov_conta
-    * Entrada: /tmp/LANCAMENTOS_2019_DESC_CREDITOS.zip
-    * Saída: /tmp/dadosJurosAn.csv
-
-
-* Task merge_mov_conta_dados_cliente
-    * Entrada /tmp/dadosJurosAn.csv e /tmp/CLIENTES_CLEANED.csv
-    * Saída: /tmp/cliente_totalCQ.csv
-
-* Task  prep_perfil
-    * Entrada /tmp/Inputs_com_scores_GERAL.csv e /tmp/cliente_totalCQ.csv
-    * Saída: /tmp/cliente_perfil_movimentacao.csv
-
-* Exercício: 
-    * Instalar o airflow
-    * executar o DAG de exemplo tutorialteste.py
