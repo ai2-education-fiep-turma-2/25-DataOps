@@ -52,9 +52,10 @@ CREATE DATABASE human_resources;
  USE human_resources;
 ```
 
-* criar tabela
+* criar tabela ( informando que está armazenada com textfile)
 ```
-create table modelos.diabete( Pregnancies FLOAT, Glucose FLOAT ,BloodPressure FLOAT ,SkinThickness FLOAT ,Insulin FLOAT ,BMI FLOAT ,DiabetesPedigreeFunction FLOAT,Age FLOAT,Class FLOAT) 
+create table modelos.diabetes( Pregnancies FLOAT, Glucose FLOAT ,BloodPressure FLOAT ,SkinThickness FLOAT ,Insulin FLOAT ,BMI FLOAT ,DiabetesPedigreeFunction FLOAT,Age FLOAT,Class FLOAT) ROW FORMAT DELIMITED FIELDS 
+TERMINATED BY ',' STORED AS TEXTFILE;
 ```
 
 * copiar csv para hdfs (terminal)
@@ -65,7 +66,7 @@ hadoop fs -put /home/silvio/git/25-DataOps/Aula1/pima-indians-diabetes.csv /home
 
 * carregar arquivo csv para tabela (hivesql)
 ```
-LOAD DATA LOCAL INPATH '/home/silvio/hiveW/warehouse/AllstarFull.csv' INTO TABLE modelos.diabete;
+LOAD DATA LOCAL INPATH '/home/silvio/hiveW/warehouse/AllstarFull.csv' INTO TABLE modelos.diabetes;
 ```
 
 
