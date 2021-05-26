@@ -9,9 +9,10 @@ Aula 1
 ```
 
 * Criar pasta para salvar bancos de dados no haddop (HDFS)
+  *  escolha um diretório de acordo com o seu file system local
 ```
   hdfs dfs -mkdir -p /home/silvio/hiveW/warehouse
-  hdfs dfs -chmod g+w home/silvio/hiveW/warehouse
+  hdfs dfs -chmod g+w /home/silvio/hiveW/warehouse
 ```
 
 * Configurar file system dos DBs
@@ -21,7 +22,10 @@ cp hive-default.xml.template hive-site.xml
 ```
 
 * Alterar path do warehouse hive-site.xml
-
+  * busque pela opção hive.metastore.warehouse.dir
+  * subsitua o valor da propriedade pelo diretório criado no passo anterior /home/silvio/hiveW/warehouse
+  
+  
 * Configurar metastore
 
 ```
