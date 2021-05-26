@@ -69,4 +69,25 @@ hadoop fs -put /home/silvio/git/25-DataOps/Aula1/pima-indians-diabetes.csv /home
 LOAD DATA LOCAL INPATH '/home/silvio/hiveW/warehouse/AllstarFull.csv' INTO TABLE modelos.diabetes;
 ```
 
+* Obtendo informação sobre as tabelas
+```
+DESCRIBE FORMATTED modelos.diabetes;
+```
 
+* Hsql (Hive SQL)
+```
+select * from modelos.diabetes;
+```
+
+* Criando Partição
+    * usando como parâmetro a coluna class
+    
+```
+create table class_part(pregnancies int,age int) PARTITIONED BY(class int);
+```
+
+* Incluindo dados nas partições criadas
+```
+set hive.exec.dynamic.partition.mode=nonstrict;
+INSERT OVERWRITE TABLE class_part PARTITION(class) SELECT pregnancies,age,class from modelos.diabetes;
+```
