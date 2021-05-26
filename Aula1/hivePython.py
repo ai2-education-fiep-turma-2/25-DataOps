@@ -1,9 +1,10 @@
 from pyhive import hive
-conn = hive.Connection(host="localhost") #, port=PORT, username="YOU")
+import pandas as pd
+
+PORT=10000
+conn = hive.Connection(host="127.0.0.1", port=PORT, username="silvio")
 
 print(conn)
 
-#cursor = hive.connect('localhost').cursor()
-#cursor.execute('select * from modelos.diabetes;')
-#print (cursor.fetchall())
-
+dataframe = pd.read_sql("select * from modelos.diabetes", conn)
+print(dataframe.describe())
