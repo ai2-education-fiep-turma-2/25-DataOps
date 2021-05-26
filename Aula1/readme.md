@@ -3,7 +3,17 @@ Aula 1
 ## Instalação e Config do HIVE
 
 * Download Hive 2.3.8
-* Trocar versão da biblioteca guava:
+
+* configurar variáveis de ambiente
+```
+export HIVE_HOME="/home/silvio/hivesource/apache-hive-2.3.8-bin"
+export PATH=$PATH:$HIVE_HOME/bin
+
+export HADOOP_HOME=/home/silvio/hadoop/hadoop-3.2.2/
+export PATH=$HADOOP_HOME/bin/:$PATH
+```
+
+* Trocar versão da biblioteca guava (apagar a mais antiga do diretório $HIVE/lib/:
 ```  
   cp $HADOOP/share/hadoop/hdfs/lib/guava-27.0-jre.jar  $HIVE/lib/
 ```
