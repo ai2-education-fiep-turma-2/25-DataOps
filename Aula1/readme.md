@@ -5,6 +5,8 @@ Aula 1
 * Download Hive 2.3.8
 
 * configurar variáveis de ambiente
+  * bashrc : /home/seuusername/.bashrc
+    
 ```
 export HIVE_HOME="/home/silvio/hivesource/apache-hive-2.3.8-bin"
 export PATH=$PATH:$HIVE_HOME/bin
