@@ -28,6 +28,7 @@ cookie_samesite=lax
   * scheduler
 ```
   airflow scheduler
+```
 
 * Criando um script para AirFlow (DAG - Directed Acyclic Graph)
 
