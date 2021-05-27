@@ -134,3 +134,87 @@ airflow test tutorialteste print_host 2015-01-01
 ```
 airflow backfill tutorialteste -s 2015-06-01 -e 2015-06-07
 ```
+
+## Exemplo de workflow com operadores em python (WFAuto.py)
+  * Preparação e treino do modelo em duas tarefas
+
+## Acessando resultados de consulta no hive pelo python
+```
+pip install pyhive
+```
+
+* Exemplo de client python para hive: hivePython.py
+
+```
+from pyhive import hive
+import pandas as pd
+
+PORT=10000
+conn = hive.Connection(host="127.0.0.1", port=PORT, username="silvio")
+
+print(conn)
+
+dataframe = pd.read_sql("select * from modelos.diabetes", conn)
+print(dataframe.describe())
+```
+
+## Criando dataset Hive a partir do problema Olist (https://www.kaggle.com/olistbr/brazilian-ecommerce)
+
+* criação do dataset
+
+```
+CREATE TABLE IF NOT EXISTS customers ( 
+customer_id STRING,
+customer_unique_id STRING,
+customer_zip_code_prefix INT,
+customer_city STRING,
+customer_state STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+CREATE TABLE IF NOT EXISTS pedidos ( 
+order_id STRING,
+customer_id STRING,
+order_status  STRING,
+order_purchase_timestamp  STRING,
+order_approved_at  STRING,
+order_delivered_carrier_date  STRING,
+order_delivered_customer_date  STRING,
+order_estimated_delivery_date  STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+
+CREATE TABLE IF NOT EXISTS itens_pedidos ( 
+order_id STRING,
+order_item_id STRING,
+product_id STRING,
+seller_id STRING,
+shipping_limit_date STRING,
+price STRING,
+freight_value STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+```
+
+* carregamento dos dados
+
+```
+LOAD DATA LOCAL INPATH '/home/silvio/hiveW/warehouse/olist_customers_dataset.csv' INTO TABLE olist.customers; 
+LOAD DATA LOCAL INPATH '/home/silvio/hiveW/warehouse//olist_orders_dataset.csv' INTO TABLE olist.pedidos;
+LOAD DATA LOCAL INPATH '/home/silvio/hiveW/warehouse/olist_order_items_dataset.csv' INTO TABLE olist.itens_pedidos;
+```
+
+* criando tabela nova para relatório unificando dados de cliente e pedidos
+```
+create table pedido_cliente_join(order_id string, customer_unique_id string, order_purchase_timestamp string, customer_state string);
+```
+
+* select com join
+```
+select  pedidos.order_id, customers.customer_unique_id, pedidos.order_purchase_timestamp, customers.customer_state from customers LEFT OUTER JOIN pedidos on (customers.customer_id = pedidos.customer_id);
+```
+
+* atualizando tabela de relatório
+```
+INSERT OVERWRITE TABLE pedido_cliente_join  select  pedidos.order_id, customers.customer_unique_id, pedidos.order_purchase_timestamp, customers.customer_state from customers LEFT OUTER JOIN pedidos on (customers.customer_id = pedidos.customer_id);
+```
