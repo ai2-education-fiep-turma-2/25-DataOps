@@ -38,7 +38,21 @@ cp hive-default.xml.template hive-site.xml
   * busque pela opção hive.metastore.warehouse.dir
   * subsitua o valor da propriedade pelo diretório criado no passo anterior /home/silvio/hiveW/warehouse
   
+
+* Incluir essas propriedades no hive-site.xml
+  * Procure pela primeira property e colocar logo abaixo
   
+```
+  <property>
+    <name>system:java.io.tmpdir</name>
+    <value>/tmp/hive/java</value>
+  </property>
+  <property>
+    <name>system:user.name</name>
+    <value>${user.name}</value>
+  </property>
+```
+
 * Configurar metastore
 
 ```
