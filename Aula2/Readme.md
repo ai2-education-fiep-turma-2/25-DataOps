@@ -7,6 +7,7 @@
 conda install airflow
 ```
 
+
 * Configurando base do Airflow
 
 ```
@@ -14,6 +15,10 @@ export AIRFLOW_HOME=~/airflowDB
 airflow initdb
 ```
 
+* Ajuste no arquivo de configuração $AIRFLOW_HOME/airflow.cfg
+```
+cookie_samesite=lax
+```
 * Criando um script para AirFlow (DAG - Directed Acyclic Graph)
 
 
