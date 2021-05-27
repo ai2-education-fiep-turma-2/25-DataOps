@@ -160,6 +160,12 @@ print(dataframe.describe())
 
 ## Criando dataset Hive a partir do problema Olist (https://www.kaggle.com/olistbr/brazilian-ecommerce)
 
+* copiando arquivos para o HDFS
+
+```
+hadoop fs -put /home/silvio/dataset/olist/*.csv /home/silvio/hiveW/warehouse/
+```
+
 * criação do dataset
 
 ```
