@@ -19,6 +19,16 @@ airflow initdb
 ```
 cookie_samesite=lax
 ```
+
+* Colocando airflow em produção
+  * web server
+```
+  airflow webserver -p 8891
+```
+  * scheduler
+```
+  airflow scheduler
+
 * Criando um script para AirFlow (DAG - Directed Acyclic Graph)
 
 
